@@ -48,7 +48,6 @@ def check_if_present_in_boundary(clinician_id, email, password):
             update_cache(clinician_id, point_coordinates, area_coordinates, is_present)
             
     except:
-        print("damn")
         send_alert(clinician_id, email, password)
     return is_present
         
