@@ -2,9 +2,12 @@ from email.message import EmailMessage
 import ssl
 import smtplib
 
+reciever = "coding-challenges@sprinterhealth.com"
+
 
 def send_alert(clinician_id, email, password):
-    reciever = "ady_ranjankar@yahoo.co.in"
+
+    global reciever
     
     subject = "Alert for Clinician Id: "+clinician_id
     body = "Clinician ID: " +clinician_id+ " is missing."

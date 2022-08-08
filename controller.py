@@ -9,7 +9,7 @@ from services.alert_message import send_alert
 from services.cache_service import check_cache, update_cache, is_alert_sent
 
 
-BOUNDARY_CHECK = 'LIBRARY'
+BOUNDARY_CHECK = 'ALGORITHM'
 
 URL_PREFIX = "https://3qbqr98twd.execute-api.us-west-2.amazonaws.com/test/clinicianstatus/"
 
@@ -48,6 +48,7 @@ def check_if_present_in_boundary(clinician_id, email, password):
             update_cache(clinician_id, point_coordinates, area_coordinates, is_present)
             
     except:
+        print("damn")
         send_alert(clinician_id, email, password)
     return is_present
         
