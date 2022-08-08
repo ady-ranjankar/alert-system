@@ -51,33 +51,34 @@ def check_intersection(p1, q1, p2, q2):
 def check_if_point_in_boundary(point_coordinates, area_coordinates):
     decrease = 0
     point = point_coordinates
-    polygon = area_coordinates[0]
-    no_of_intersections = 0
-    m1 = point[0]
-    for i in polygon[1:]:
-        if i[0] > m1:
-            m1 = i[0]
-
-    point_2 = [m1+0.1, point[1]]
-
-    for i in range(len(polygon) - 1):
-        if(polygon[i][1] == point[1]):
-            if(i==0):
-                prev = len(polygon)-2
-            else:
-                prev = i-1
-            if(get_orientation(point,polygon[i],polygon[i+1]) != get_orientation(point,polygon[i],polygon[prev])):
-                decrease += 1
-        if(check_intersection(point, point_2, polygon[i], polygon[i+1])):
-            if get_orientation(polygon[i], point,
-                           polygon[i+1]) == 0:
-                return is_point_onSegment(polygon[i], point,
-                                 polygon[i+1])
-            no_of_intersections += 1
-            
-    no_of_intersections -= decrease
     
-    if( no_of_intersections > 0):
-        return (no_of_intersections % 2 == 1)
-    return(False)
+    for polygon in area_coordinates:
+        no_of_intersections = 0
+        m1 = point[0]
+        for i in polygon[1:]:
+            if i[0] > m1:
+                m1 = i[0]
+
+        point_2 = [m1+0.1, point[1]]
+        for i in range(len(polygon) - 1):
+            if(polygon[i][1] == point[1]):
+                if(i==0):
+                    prev = len(polygon)-2
+                else:
+                    prev = i-1
+                if(get_orientation(point,polygon[i],polygon[i+1]) != get_orientation(point,polygon[i],polygon[prev])):
+                    decrease += 1
+            if(check_intersection(point, point_2, polygon[i], polygon[i+1])):
+                if get_orientation(polygon[i], point,
+                            polygon[i+1]) == 0:
+                    return is_point_onSegment(polygon[i], point,
+                                    polygon[i+1])
+                no_of_intersections += 1
+                
+        no_of_intersections -= decrease
+        
+        if( no_of_intersections > 0):
+            if no_of_intersections % 2 == 1:
+                return True
+    return False
     
